@@ -1,0 +1,59 @@
+"use client";
+
+import {
+  useSidebar,
+  SidebarGroup,
+  SidebarGroupLabel,
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem,
+} from "../ui/sidebar";
+import { ProjectProps, WorkspaceMembersProps } from "@/utils/types";
+import { usePathname } from "next/navigation";
+import { CreateProjectForm } from "../project/create-project-form";
+
+export const NavProjects = ({
+  projects,
+  workspaceMembers,
+}: {
+  projects: ProjectProps[];
+  workspaceMembers: WorkspaceMembersProps[];
+}) => {
+  const { isMobile, setOpenMobile } = useSidebar();
+  const pathname = usePathname();
+
+  return (
+    <>
+      <SidebarGroup className="group-data-[collapsible=icon]:hidden">
+        <SidebarGroupLabel className="flex justify-between">
+          <span className="text-sm font-semibold text-muted-foreground uppercase">
+            Projects
+          </span>
+
+          <CreateProjectForm workspaceMembers={workspaceMembers} />
+        </SidebarGroupLabel>
+        <SidebarMenu>
+          {projects?.map((proj) => {
+            const href = `/workspace/${proj.workspaceId}/projects/${proj.id}`;
+            return (
+              <SidebarMenuItem key={proj?.id}>
+                <SidebarMenuButton>
+                  <a
+                    href={href}
+                    className={
+                      pathname === href
+                        ? "text-primary-foreground font-semibold"
+                        : "text-muted-foreground hover:text-primary-foreground"
+                    }
+                  >
+                    {proj?.name}
+                  </a>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+            );
+          })}
+        </SidebarMenu>
+      </SidebarGroup>
+    </>
+  );
+};
