@@ -1,3 +1,5 @@
+import { TaskStatus } from "@/lib/generated/prisma";
+
 export const roleList = [
   "Designer",
   "Developer",
@@ -23,3 +25,48 @@ export const industryTypesList = [
   "Technology",
   "Others",
 ];
+
+export const taskStats = [
+  {
+    status: TaskStatus.TODO,
+    label: "TO DO",
+    color: "bg-blue-500",
+  },
+  {
+    status: TaskStatus.IN_PROGRESS,
+    label: "IN PROGRESS",
+    color: "bg-yellow-500",
+  },
+  {
+    status: TaskStatus.COMPLETED,
+    label: "COMPLETED",
+    color: "bg-green-500",
+  },
+  {
+    status: TaskStatus.BLOCKED,
+    label: "BLOCKED",
+    color: "bg-red-500",
+  },
+  {
+    status: TaskStatus.BACKLOG,
+    label: "BACKLOG",
+    color: "bg-gray-500",
+  },
+  {
+    status: TaskStatus.IN_REVIEW,
+    label: "IN REVIEW",
+    color: "bg-blue-500",
+  },
+];
+
+
+
+export const taskStatusVariant = {
+  [TaskStatus.BLOCKED]: "#ef4444",
+  [TaskStatus.TODO]: "#6366f1",
+  [TaskStatus.IN_PROGRESS]: "#f59e0b",
+  [TaskStatus.COMPLETED]: "#10b981",
+  [TaskStatus.BACKLOG]: "#ec4899",
+  [TaskStatus.IN_REVIEW]: "#a855f7",
+  default: "#6366f1",
+};

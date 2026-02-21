@@ -6,12 +6,22 @@ export const userRequired = async () => {
 
   const isUserAuthenticated = await isAuthenticated();
 
-  if (!isUserAuthenticated) redirect("/api/auth/login");
+  // If not authenticated, redirect immediately
+  if (!isUserAuthenticated) {
+    redirect("/api/auth/login");
+  }
 
   const user = await getUser();
 
+  // TypeScript Guard: 
+  // Even if authenticated, 'getUser' might theoretically return null in some edge cases.
+  // We explicitly check for user and user.id to satisfy TypeScript.
+  if (!user || !user.id) {
+    redirect("/api/auth/login");
+  }
+
   return {
-    user,
+    user: user, // Now TypeScript knows 'user' is not null
     isUserAuthenticated,
   };
 };

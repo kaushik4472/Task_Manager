@@ -42,8 +42,8 @@ export const NavProjects = ({
                     href={href}
                     className={
                       pathname === href
-                        ? "text-primary-foreground font-semibold"
-                        : "text-muted-foreground hover:text-primary-foreground"
+                        ? "text-blue-500 font-semibold"
+                        : "text-muted-foreground "
                     }
                   >
                     {proj?.name}

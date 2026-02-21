@@ -1,6 +1,13 @@
-import { $Enums, AccessLevel, Workspace } from "@/lib/generated/prisma";
+import {
+  $Enums,
+  AccessLevel,
+  Task,
+  TaskStatus,
+  Workspace,
+  WorkspaceMember,
+} from "@/lib/generated/prisma";
 
-export interface WorkspaceMembersProps extends Workspace {
+export interface WorkspaceMembersProps extends WorkspaceMember {
   user: {
     id: string;
     name: string;
@@ -13,7 +20,6 @@ export interface WorkspaceMembersProps extends Workspace {
     projectId: string;
   }[];
 }
-
 
 export interface ProjectProps {
   id: string;
@@ -35,7 +41,6 @@ export interface ProjectProps {
   }[];
 }
 
-
 export interface WorkspacesProps {
   id: string;
   createdAt: Date;
@@ -45,4 +50,23 @@ export interface WorkspacesProps {
   workspace: {
     name: string;
   };
+}
+
+export interface CommentProps extends Comment {
+  user: { id: string; name: string; image: string };
+}
+
+export interface ProjectTaskProps extends Task {
+  assignedTo: {
+    id: string;
+    name: string;
+    image?: string;
+  };
+  project: { id: string; name: string };
+}
+
+export interface Column {
+  id: TaskStatus;
+  title: string;
+  tasks: ProjectTaskProps[];
 }
